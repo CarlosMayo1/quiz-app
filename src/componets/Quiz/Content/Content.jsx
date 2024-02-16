@@ -45,7 +45,7 @@ const Content = ({ questions, setResult, setShowResult }) => {
 	const addLeadingZero = number => (number > 9 ? number : `0${number}`)
 
 	return (
-		<div className='container m-auto w-10 max-w-xl min-w-max bg-white rounded-md mt-28 py-4 px-6  sm:py-8 sm:px-16'>
+		<div className='container m-auto w-10 max-w-xl min-w-max bg-white rounded-md py-4 px-6  sm:py-8 sm:px-16'>
 			<div>
 				<span className='text-lg sm:text-3xl font-bold text-color-3'>
 					{addLeadingZero(activeQuestion + 1)}
