@@ -1,7 +1,9 @@
 // react
 import { useState } from 'react'
+// utils
+import { insertNewUser } from '../../../utils/users'
 
-const Content = ({ questions, setResult, setShowResult }) => {
+const Content = ({ questions, setResult, setShowResult, result }) => {
 	const [activeQuestion, setActiveQuestion] = useState(0)
 	const [selectedAnswer, setSelectedAnswer] = useState('')
 	const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null)
@@ -37,8 +39,24 @@ const Content = ({ questions, setResult, setShowResult }) => {
 		if (activeQuestion !== questions.length - 1) {
 			setActiveQuestion(prevState => prevState + 1)
 		} else {
-			setActiveQuestion(0)
+			// submit the information of the user
+			const user = {
+				name: result.username,
+				socore: result.score,
+				incorrectAnswers: result.wrongAnswers,
+			}
+			insertNewUser(user).then(response => console.log(response))
+
 			setShowResult(true)
+			setActiveQuestion(0)
+			setSelectedAnswer('')
+			setSelectedAnswerIndex(null)
+			setResult({
+				username: '',
+				score: 0,
+				correctAnswers: 0,
+				wrongAnswers: 0,
+			})
 		}
 	}
 
@@ -76,7 +94,7 @@ const Content = ({ questions, setResult, setShowResult }) => {
 						selectedAnswerIndex === null
 							? 'bg-color-4 cursor-not-allowed text-slate-500'
 							: 'cursor-pointer'
-					} bg-pink-500 rounded-lg text-white py-2.5 px-4 outline-none text-sm sm:text-base mt-3`}
+					} bg-pink-500 rounded-lg text-white py-2.5 px-4 outline-none text-sm sm:text-base mt-3 font-semibold`}
 					onClick={onClickNextHandler}
 					disabled={selectedAnswerIndex === null}
 				>

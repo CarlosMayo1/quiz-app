@@ -3,9 +3,15 @@ import { useState } from 'react'
 // component
 import Quiz from './componets/Quiz/Quiz'
 import UserModal from './componets/userModal/UserModal'
+
 function App() {
-	const [username, setUsername] = useState('')
 	const [isOpen, setIsOpen] = useState(true)
+	const [result, setResult] = useState({
+		username: '',
+		score: 0,
+		correctAnswers: 0,
+		wrongAnswers: 0,
+	})
 
 	const closeModal = () => {
 		setIsOpen(false)
@@ -18,12 +24,12 @@ function App() {
 					isOpen={isOpen}
 					setIsOpen={setIsOpen}
 					closeModal={closeModal}
-					username={username}
-					setUsername={setUsername}
+					username={result.username}
+					setResult={setResult}
 				/>
 			) : (
 				<div>
-					<Quiz />
+					<Quiz result={result} setResult={setResult} />
 				</div>
 			)}
 		</div>

@@ -2,26 +2,27 @@
 import { useState } from 'react'
 // quiz
 import { quiz } from '../../quiz'
+// components
 import Result from '../Result/Result'
 import Content from './Content/Content'
 
-const Quiz = () => {
+const Quiz = ({ result, setResult }) => {
 	const [showResult, setShowResult] = useState(false)
-	const [result, setResult] = useState({
-		score: 0,
-		correctAnswers: 0,
-		wrongAnswers: 0,
-	})
 
 	const { questions } = quiz
 
 	return (
 		<>
 			{showResult ? (
-				<Result result={result} questions={questions} />
+				<Result
+					result={result}
+					questions={questions}
+					setShowResult={setShowResult}
+				/>
 			) : (
 				<Content
 					questions={questions}
+					result={result}
 					setResult={setResult}
 					setShowResult={setShowResult}
 				/>

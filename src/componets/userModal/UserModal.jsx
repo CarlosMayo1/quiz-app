@@ -5,13 +5,7 @@ import { useForm } from 'react-hook-form'
 // headless-ui
 import { Dialog, Transition } from '@headlessui/react'
 
-const UserModal = ({
-	isOpen,
-	setIsOpen,
-	closeModal,
-	username,
-	setUsername,
-}) => {
+const UserModal = ({ isOpen, setIsOpen, closeModal, username, setResult }) => {
 	const {
 		register,
 		setError,
@@ -20,7 +14,10 @@ const UserModal = ({
 	} = useForm()
 
 	const handleSubmitForm = handleSubmit(data => {
-		setUsername(data.username)
+		setResult(prevState => ({
+			username: data.username,
+			...prevState,
+		}))
 		setIsOpen(false)
 	})
 
